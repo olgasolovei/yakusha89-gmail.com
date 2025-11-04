@@ -6,6 +6,6 @@
 Мета роботи: Здобути навики збору та документування функціональних вимог 
 та нефункціональних вимо
 ## Зміст каталогу
-2.1-FunctionalRequirements
-2.2-NonFunctionalRequirements
- 
+- 2.1-FunctionalRequirements
+- 2.2-NonFunctionalRequirements
+- Questions
