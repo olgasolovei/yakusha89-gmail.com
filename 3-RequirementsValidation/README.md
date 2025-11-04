@@ -6,8 +6,8 @@
 Мета роботи: Здобути навики розробки критеріїв приймального тестування та 
 прототипів "горизонтальних" прототипів.
 ## Зміст каталогу
-3.1-UserStories 
-
-3.2-TraceabilityMatrix 
-
-3.3-Prototypes 
+- 3.1-UserStories
+- 3.2-TracebilityMatrix
+- 3.3-Prototypes
+- Questions
+- image
