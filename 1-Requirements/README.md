@@ -6,7 +6,7 @@
 Мета роботи: Здобути навики створення варіантів використання та складання 
 діаграм використання.
 ## Зміст каталогу
-1.1-UseCases
-1.2-UseCaseDiagram
-Questions
-image
+- 1.1-UseCases
+- 1.2-UseCaseDiagram
+- Questions
+- image
