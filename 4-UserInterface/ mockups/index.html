@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>NFR_02_Dashboard</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+ .dashboard-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+}
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+.table th, .table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+.chart-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ccc;
+}
+.filter {
+    margin-bottom: 10px;
+}
+.alert {
+    background-color: #ff4c4c;
+    color: white;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+.button {
+    background-color: #0077cc;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 5px 0;
+}
+.button:hover {
+    background-color: #005fa3;
+}
+</style>
+</head>
+<body>
+<header>Dashboard – Моніторинг тросів</header>
+<nav>
+    <a href="detail.html">Подробиці тросу</a>
+    <a href="history.html">Історія подій</a>
+    <a href="settings.html">Налаштування</a>
+</nav>
+<div class="container">
+    <h2>Стан всіх тросів</h2>
+
+    <div class="filter">
+        <label>Фільтр за ризиком:</label>
+        <select id="riskFilter" onchange="filterTable()">
+            <option value="all">Всі</option>
+            <option value="low">Низький</option>
+            <option value="medium">Середній</option>
+            <option value="high">Високий</option>
+        </select>
+    </div>
+
+    <div class="dashboard-grid">
+         <div>
+            <table class="table" id="cablesTable">
+                <thead>
+                    <tr>
+                        <th>Трос</th>
+                        <th>Ризик</th>
+                        <th>Знос</th>
+                        <th>Навантаження</th>
+                        <th>Дії</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-risk="high">
+                        <td>№3</td>
+                        <td>85%</td>
+                        <td>12%</td>
+                        <td>750 кг</td>
+                        <td><button class="button" onclick="location.href='detail.html'">Деталі</button></td>
+                    </tr>
+                    <tr data-risk="medium">
+                        <td>№2</td>
+                        <td>50%</td>
+                        <td>8%</td>
+                        <td>600 кг</td>
+                        <td><button class="button" onclick="location.href='detail.html'">Деталі</button></td>
+                    </tr>
+                    <tr data-risk="low">
+                        <td>№1</td>
+                        <td>20%</td>
+                        <td>3%</td>
+                        <td>400 кг</td>
+                        <td><button class="button" onclick="location.href='detail.html'">Деталі</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+         <div class="chart-container">
+            <canvas id="riskChart"></canvas>
+        </div>
+    </div>
+
+     <div class="alert">
+        Високий ризик розриву тросу №3!
+        <button class="button" onclick="location.href='alert.html'">Деталі тривоги</button>
+    </div>
+</div>
+
+<script>
+ const ctx = document.getElementById('riskChart').getContext('2d');
+const riskChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['№1', '№2', '№3'],
+        datasets: [{
+            label: 'Ризик (%)',
+            data: [20, 50, 85],
+            backgroundColor: ['green', 'orange', 'red']
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true,
+                max: 100
+            }
+        }
+    }
+});
+
+ function filterTable() {
+    const filter = document.getElementById('riskFilter').value;
+    const rows = document.querySelectorAll('#cablesTable tbody tr');
+
+    rows.forEach(row => {
+        if (filter === 'all') {
+            row.style.display = '';
+        } else {
+            if (row.dataset.risk === filter) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        }
+    });
+}
+</script>
+
+</body>
+</html>

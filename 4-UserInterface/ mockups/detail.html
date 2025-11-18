@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>NFR_03_DetailView</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+.container {
+    padding: 20px;
+}
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+.card {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ccc;
+}
+.button {
+    background-color: #0077cc;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 5px 5px 0 0;
+}
+.button:hover {
+    background-color: #005fa3;
+}
+</style>
+</head>
+<body>
+<header>Подробиці тросу</header>
+<div class="container">
+    <h2>Трос №3</h2>
+
+    <div class="stats-grid">
+        <div class="card">
+            <h3>Поточні показники</h3>
+            <p>Ризик розриву: <b>85%</b></p>
+            <p>Знос: <b>12%</b></p>
+            <p>Навантаження: <b>750 кг</b></p>
+            <p>Кількість підйомів: <b>320</b></p>
+            <p>Температура: <b>32°C</b></p>
+        </div>
+
+        <div class="card">
+            <h3>Графік стану тросу</h3>
+            <canvas id="cableChart"></canvas>
+        </div>
+    </div>
+
+    <div style="margin-top:20px;">
+        <button class="button" onclick="window.location.href='index.html'">Назад на Dashboard</button>
+        <button class="button" onclick="generateReport()">Створити звіт</button>
+    </div>
+</div>
+
+<script>
+const ctx = document.getElementById('cableChart').getContext('2d');
+const cableChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ['01.11','02.11','03.11','04.11','05.11','06.11','07.11'],
+        datasets: [
+            {
+                label: 'Ризик (%)',
+                data: [20, 35, 50, 60, 70, 80, 85],
+                borderColor: 'red',
+                backgroundColor: 'rgba(255,0,0,0.2)',
+                tension: 0.3
+            },
+            {
+                label: 'Знос (%)',
+                data: [2, 4, 6, 8, 9, 11, 12],
+                borderColor: 'orange',
+                backgroundColor: 'rgba(255,165,0,0.2)',
+                tension: 0.3
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true,
+                max: 100
+            }
+        }
+    }
+});
+
+function generateReport() {
+    alert('Звіт по тросу №3 створено!');
+}
+</script>
+
+</body>
